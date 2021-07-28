@@ -33,46 +33,41 @@ def draw(screen, etc):
         trigger = True
         
     if trigger == True :
-        unistr = get_unicode_character(int(etc.knob3 * 10)+1)
-    
-    for i in range(0,81) :
+        unistr = get_unicode_character(int(etc.knob3 * 11)+1)
         
-        odd = i%2
-        if odd == 0 :
-            x = ((i % 9) * x160 + x80 + shift) - x160
-            y = (int(i / 9) % 9) * y90 + y45 #+ (shift-70)
+    for j in range(0,10):
+        for i in range(0,9) :
+        
+            odd = i%2
+            if odd == 0 :
+                x = (i * x160 + x160 + shift) - x160
+                y = (j * y90) - y45 #+ (shift-70)
                 
-        if odd == 1 :
-            x = ((i % 9) * x160 + x80) - x160
-            y = (int(i / 9) % 9) * y90 + y45
+            if odd == 1 :
+                x = (i * x160 + x160) - x160
+                y = (j * y90) - y45
             
-        textpos = text.get_rect(center = (x,y))
-        screen.blit(text, textpos)
+            textpos = text.get_rect(center = (x,y))
+            screen.blit(text, textpos)
     trigger = False
-            
-
 
 def get_unicode_character(set) :
     
-    if set == 0 :
-        # all of them (or a lot of them...)
-        return unichr(random.choice((0x0000, 0xFF00)) + random.randint(0, 0xff))
-        
     if set == 1 :
-        # ogham
-        return unichr(random.randint(0x1680, 0x169C))
+        # geometric shapes
+        return unichr(random.randint(0x25a0, 0x25ff))
         
     if set == 2 :
         # arrows
-        return unichr(random.randint(0x2190, 0x21FF))
+        return unichr(random.randint(0x219C, 0x21BB))
         
     if set == 3 :
         # math
-        return unichr(random.randint(0x2200, 0x22ff))
+        return unichr(random.randint(0x223D, 0x224D))
         
     if set == 4 :
-        # geometric shapes
-        return unichr(random.randint(0x25a0, 0x25ff))
+        # ogham
+        return unichr(random.randint(0x1680, 0x169C))
         
     if set == 5 :
         # box drawing
@@ -83,21 +78,37 @@ def get_unicode_character(set) :
         return unichr(random.randint(0x2800, 0x28FF))
         
     if set == 7 :
-        # More math
-        return unichr(random.randint(0x2A00, 0x2ADF))
+        # I Ching
+        return unichr(random.randint(0x4DC2, 0x4DCF))
         
     if set == 8 :
         # from math -- sharp symbols
         return unichr(random.randint(0x2A80, 0x2ABC))
 
     if set == 9 :
-        # more arrows
-        return unichr(random.randint(0x2900, 0x297F))
+        # vai syllables
+        return unichr(random.randint(0xA500, 0xA62B))
     
     if set == 10 :
         #chess
         return unichr(random.randint(0xE010, 0xE04F))
         
     if set == 11 :
-        #Genji-mon Symbols
-        return unichr(random.randint(0xF500, 0xF535))
+        #different boxes
+        return unichr(random.randint(0x2580, 0x25AF))
+        
+    if set == 12 : 
+        #select random glyph from the above subsets
+        return unichr(random.choice([
+            random.randint(0x2580, 0x25AF), # Different Boxes
+            random.randint(0xE010, 0xE04F), # Chess
+            random.randint(0xA500, 0xA62B), # Vai syllables
+            random.randint(0x2A80, 0x2ABC), # Sharp Symbols
+            random.randint(0x4DC2, 0x4DCF), # I Ching
+            random.randint(0x2800, 0x28FF), # Brail
+            random.randint(0x2500, 0x257f), # Box Drawing
+            random.randint(0x1680, 0x169C), # Ogham
+            random.randint(0x223D, 0x224D), # Math
+            random.randint(0x219C, 0x21BB), # Arrows
+            random.randint(0x25a0, 0x25ff)  # Geometric Shapes
+            ]))
