@@ -24,7 +24,15 @@ def draw(screen, etc):
         xr = etc.xres
         size500 = ((500*xr)/1280)
         size = size500 * (etc.knob2 + .1)
-        unistr = unichr(random.randint(0x1680, 0x169C))
+        unistr = unichr(random.choice([
+            random.randint(0x2580, 0x25AF), # Different Boxes
+            random.randint(0xA500, 0xA62B), # Vai syllables
+            random.randint(0x4DC2, 0x4DCF), # I Ching
+            random.randint(0x2800, 0x28FF), # Brail
+            random.randint(0x2500, 0x257f), # Box Drawing
+            random.randint(0x1680, 0x169C), # Ogham
+            random.randint(0x25a0, 0x25ff)  # Geometric Shapes
+            ]))
         x = random.randrange(0,screen.get_width())
         y = random.randrange(0,screen.get_height())
         color = etc.color_picker(etc.knob4)
